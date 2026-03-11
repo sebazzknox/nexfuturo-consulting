@@ -1,0 +1,109 @@
+/* ============================================
+   NEXFUTURO CONSULTING — Estilos Principales
+   styles.css
+   ============================================ */
+
+/* ── VARIABLES GLOBALES ── */
+:root {
+  --navy:       #0a0f1e;
+  --navy2:      #101728;
+  --blue:       #1a6fff;
+  --blue-light: #3d8bff;
+  --accent:     #00e5ff;
+  --white:      #ffffff;
+  --gray:       #8a9bb8;
+  --light-bg:   #f4f7ff;
+  --border:     rgba(255, 255, 255, 0.07);
+}
+
+/* ── RESET Y BASE ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── TIPOGRAFÍA GENERAL ── */
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 600px;
+}
+
+.section-sub {
+  color: var(--gray);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-top: 1rem;
+  max-width: 520px;
+}
+
+/* ── SECCIONES ── */
+section {
+  padding: 100px 6%;
+}
+
+/* ── BOTONES GENERALES ── */
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 0 30px rgba(26, 111, 255, 0.4);
+}
+.btn-primary:hover {
+  background: var(--blue-light);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ── ANIMACIONES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

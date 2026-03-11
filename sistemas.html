@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas a Medida — Nexfuturo Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/navbar.css">
+<style>
+:root {
+  --bg: #050d1a;
+  --blue: #1a6fff;
+  --cyan: #00e5ff;
+  --muted: #a0b4d6;
+  --dim: #4a5f7a;
+  --border: rgba(26,111,255,0.15);
+  --card: rgba(10,20,40,0.8);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: #fff; overflow-x: hidden; }
+
+.hl { background: linear-gradient(100deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.section-label { display: inline-flex; align-items: center; gap: 6px; background: rgba(26,111,255,0.1); border: 1px solid rgba(26,111,255,0.25); color: var(--muted); padding: 5px 14px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+.btn-p { background: linear-gradient(135deg, var(--blue), #0055cc); color: #fff; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 20px rgba(26,111,255,0.4); transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
+.btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,111,255,0.6); }
+.btn-s { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background 0.2s; display: inline-block; }
+.btn-s:hover { background: rgba(255,255,255,0.1); }
+
+/* PARTÍCULAS */
+#particles-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+/* FADE IN */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fd1 { transition-delay: 0.1s; }
+.fd2 { transition-delay: 0.2s; }
+.fd3 { transition-delay: 0.3s; }
+.fd4 { transition-delay: 0.4s; }
+
+/* navbar usa css/navbar.css */
+
+/* HERO */
+.sis-hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 6% 80px; position: relative; z-index: 1; overflow: hidden; }
+.sis-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 25% 50%, rgba(26,111,255,0.1) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 85% 25%, rgba(0,229,255,0.06) 0%, transparent 60%); pointer-events: none; }
+.sis-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; position: relative; }
+.sis-hero-content h1 { font-family: 'Sora', sans-serif; font-size: clamp(2.4rem, 4.5vw, 4rem); font-weight: 900; line-height: 1.05; margin-bottom: 20px; }
+.sis-hero-content p { color: var(--muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 36px; max-width: 460px; }
+.sis-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.sis-hero-rubros { display: flex; flex-wrap: wrap; gap: 7px; }
+.rubro-chip { background: rgba(26,111,255,0.07); border: 1px solid rgba(26,111,255,0.18); color: var(--muted); padding: 5px 12px; border-radius: 20px; font-size: 0.72rem; transition: all 0.2s; cursor: default; }
+.rubro-chip:hover { background: rgba(26,111,255,0.18); color: #fff; }
+.rubro-chip.hl-chip { background: rgba(0,229,255,0.07); border-color: rgba(0,229,255,0.2); color: #7ee8fa; }
+
+/* STATS */
+.sis-hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.hstat { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; position: relative; overflow: hidden; }
+.hstat::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,111,255,0.08), transparent 70%); opacity: 0; transition: opacity 0.3s; }
+.hstat:hover { border-color: rgba(0,229,255,0.4); box-shadow: 0 0 30px rgba(0,229,255,0.1), 0 15px 40px rgba(0,0,0,0.3); transform: translateY(-4px); }
+.hstat:hover::before { opacity: 1; }
+.hstat-val { font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #fff 40%, var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+.hstat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+/* SISTEMAS */
+.sis-cards { padding: 100px 6%; position: relative; z-index: 1; }
+.sis-sec-header { text-align: center; margin-bottom: 60px; }
+.sis-sec-header h2 { font-family: 'Sora', sans-serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 800; margin-bottom: 12px; }
+.sis-sec-header p { color: var(--muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+.sis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+/* CARDS */
+.scard { background: var(--card); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s; position: relative; cursor: pointer; }
+.scard::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--glow, rgba(26,111,255,0.1)), transparent 70%); opacity: 0; transition: opacity 0.35s; pointer-events: none; }
+.scard:hover { transform: translateY(-8px) scale(1.01); border-color: var(--ac, var(--cyan)); box-shadow: 0 0 40px var(--glow2, rgba(26,111,255,0.15)), 0 20px 50px rgba(0,0,0,0.35); }
+.scard:hover::after { opacity: 1; }
+.scard-header { padding: 26px 26px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 16px; }
+.scard-icon-wrap { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; transition: transform 0.3s, box-shadow 0.3s; }
+.scard:hover .scard-icon-wrap { transform: scale(1.12) rotate(-5deg); box-shadow: 0 0 20px var(--glow2, rgba(26,111,255,0.3)); }
+.scard-info h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.scard-info p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.scard-badge { margin-left: auto; font-size: 0.6rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; border: 1px solid; flex-shrink: 0; white-space: nowrap; }
+.scard-body { padding: 20px 26px; }
+.scard-features { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 18px; }
+.scard-feat { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); }
+.scard-feat::before { content: '✓'; color: var(--ac); font-weight: 700; flex-shrink: 0; }
+.scard-rubros { display: flex; flex-wrap: wrap; gap: 5px; }
+.scard-rubro { font-size: 0.62rem; padding: 3px 9px; border-radius: 20px; background: rgba(255,255,255,0.04); color: var(--dim); border: 1px solid rgba(255,255,255,0.07); }
+.scard-footer { padding: 18px 26px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.scard-price .from { font-size: 0.7rem; color: var(--dim); }
+.scard-price .val { font-family: 'Sora', sans-serif; font-size: 1.55rem; font-weight: 800; color: #fff; }
+.scard-price .period { font-size: 0.72rem; color: var(--dim); margin-left: 4px; }
+.scard-btn { padding: 10px 22px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; border: 1px solid; cursor: pointer; transition: all 0.2s; text-decoration: none; background: transparent; }
+.scard-btn:hover { color: #fff !important; }
+
+/* WHATSAPP PRO */
+.wa-section { padding: 80px 6% 100px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+.wa-grid { display: grid; grid-template-columns: 1fr 300px; gap: 70px; align-items: center; max-width: 1100px; margin: 0 auto; }
+.wa-section-label { display: inline-flex; align-items: center; gap: 6px; background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.2); color: #6ee7b7; padding: 5px 14px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+.wa-content h2 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
+.wa-content p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 24px; }
+.wa-includes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 26px; }
+.wa-inc { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
+.wa-inc::before { content: '✓'; color: #25d366; font-weight: 700; flex-shrink: 0; }
+.wa-price-box { background: rgba(37,211,102,0.06); border: 1px solid rgba(37,211,102,0.2); border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; display: inline-flex; align-items: baseline; gap: 10px; }
+.wa-price-val { font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 900; color: #fff; }
+.wa-price-note { font-size: 0.78rem; color: var(--muted); }
+.wa-btn { background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(37,211,102,0.3); transition: transform 0.2s; }
+.wa-btn:hover { transform: translateY(-2px); }
+.wa-phone { background: #0d1b2a; border-radius: 28px; border: 1.5px solid rgba(255,255,255,0.1); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 50px rgba(37,211,102,0.07); }
+.wa-ph-header { background: #075e54; padding: 10px 14px; display: flex; align-items: center; gap: 8px; }
+.wa-ph-avatar { width: 34px; height: 34px; background: linear-gradient(135deg, #25d366, #128c7e); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 0.65rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+.wa-ph-info h4 { color: #fff; font-size: 0.75rem; font-weight: 600; }
+.wa-ph-info p { color: rgba(255,255,255,0.55); font-size: 0.6rem; }
+.wa-ph-dot { width: 7px; height: 7px; background: #25d366; border-radius: 50%; margin-left: auto; box-shadow: 0 0 6px #25d366; }
+.wa-ph-chat { background: #0b1320; padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+.wm { max-width: 84%; padding: 7px 10px; border-radius: 10px; font-size: 0.67rem; line-height: 1.45; }
+.wm.r { background: #1e2d3d; color: #cde0f8; border-radius: 10px 10px 10px 2px; }
+.wm.s { background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; border-radius: 10px 10px 2px 10px; align-self: flex-end; }
+.wm-menu { background: #1e2d3d; border-radius: 10px; padding: 9px 10px; max-width: 90%; }
+.wm-menu-t { font-size: 0.62rem; font-weight: 700; color: #00e5ff; margin-bottom: 5px; }
+.wm-item { font-size: 0.61rem; color: var(--muted); padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.wm-item:last-child { border: none; }
+
+/* PROCESO */
+.proceso { padding: 80px 6%; background: rgba(26,111,255,0.02); border-top: 1px solid var(--border); position: relative; z-index: 1; }
+.proceso-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 50px; position: relative; }
+.proceso-steps::before { content: ''; position: absolute; top: 27px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(26,111,255,0.4), rgba(0,229,255,0.4), rgba(26,111,255,0.4), transparent); }
+.step { text-align: center; padding: 0 10px; }
+.step-num { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0 auto 16px; box-shadow: 0 4px 20px rgba(26,111,255,0.4); position: relative; z-index: 1; transition: transform 0.3s, box-shadow 0.3s; }
+.step:hover .step-num { transform: scale(1.15); box-shadow: 0 8px 30px rgba(26,111,255,0.6); }
+.step h4 { font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.step p { font-size: 0.72rem; color: var(--muted); line-height: 1.55; }
+
+/* CTA */
+.sis-cta { padding: 100px 6%; text-align: center; position: relative; z-index: 1; overflow: hidden; }
+.sis-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 80% at 50% 50%, rgba(26,111,255,0.1) 0%, transparent 70%); pointer-events: none; }
+.sis-cta h2 { font-family: 'Sora', sans-serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900; margin-bottom: 16px; position: relative; }
+.sis-cta p { color: var(--muted); font-size: 1rem; max-width: 480px; margin: 0 auto 40px; position: relative; line-height: 1.75; }
+.sis-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* FOOTER */
+.sis-footer { background: rgba(5,13,26,0.8); border-top: 1px solid var(--border); padding: 28px 6%; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+.sis-footer-logo { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; }
+.sis-footer-logo span { color: var(--cyan); }
+.sis-footer p { font-size: 0.75rem; color: var(--dim); }
+.sis-footer a { font-size: 0.75rem; color: var(--muted); text-decoration: none; }
+.sis-footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAVBAR — idéntico al index -->
+<nav>
+    <a href="index.html" class="logo">Nex<span>futuro</span> Consulting</a>
+    <ul class="nav-links">
+      <li><a href="index.html#servicios">Servicios</a></li>
+      <li><a href="index.html#planes">Planes</a></li>
+      <li><a href="index.html#testimonios">Testimonios</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+      <li><a href="sistemas.html" class="active">Digitaliz&#225; tu negocio</a></li>
+      <li><a href="index.html#nosotros">Nosotros</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <a href="index.html#contacto" class="nav-cta">Consult&#225; gratis</a>
+  </nav>
+
+<!-- HERO -->
+<section class="sis-hero">
+  <div class="sis-hero-grid">
+    <div class="sis-hero-content">
+      <div class="section-label fade-in">🚀 Sistemas a medida para PyMEs</div>
+      <h1 class="fade-in fd1">Le digitalizamos<br>el negocio a<br><span class="hl">locales chicos</span></h1>
+      <p class="fade-in fd2">No es solo una web. Es tu negocio funcionando solo: turnos, pedidos, socios, recordatorios — todo automatizado, desde el celular.</p>
+      <div class="sis-hero-btns fade-in fd3">
+        <a href="https://wa.me/5491100000000" target="_blank" class="btn-p">💬 Quiero mi sistema</a>
+        <a href="#sistemas" class="btn-s">Ver sistemas ↓</a>
+      </div>
+      <div class="sis-hero-rubros fade-in fd4">
+        <span class="rubro-chip hl-chip">✂️ Barberías</span>
+        <span class="rubro-chip">🏋️ Gimnasios</span>
+        <span class="rubro-chip">🍕 Casas de comida</span>
+        <span class="rubro-chip hl-chip">👩‍⚕️ Consultorios</span>
+        <span class="rubro-chip">🔧 Ferreterías</span>
+        <span class="rubro-chip">📋 Est. Contables</span>
+        <span class="rubro-chip hl-chip">🏫 Colegios</span>
+        <span class="rubro-chip">🏗️ Corralones</span>
+        <span class="rubro-chip">🚛 Distribuidoras</span>
+        <span class="rubro-chip">🧴 Kioscos</span>
+        <span class="rubro-chip">🐾 Veterinarias</span>
+        <span class="rubro-chip">🧠 Psicólogos</span>
+      </div>
+    </div>
+    <div class="sis-hero-stats">
+      <div class="hstat fade-in fd1">
+        <div class="hstat-val" data-target="24" data-suffix="hs">0hs</div>
+        <div class="hstat-lbl">Tu sistema trabaja sin parar</div>
+      </div>
+      <div class="hstat fade-in fd2">
+        <div class="hstat-val" data-target="2" data-suffix=" sem">0 sem</div>
+        <div class="hstat-lbl">Tiempo de entrega promedio</div>
+      </div>
+      <div class="hstat fade-in fd3">
+        <div class="hstat-val" data-target="4" data-suffix="+">0+</div>
+        <div class="hstat-lbl">Sistemas disponibles por rubro</div>
+      </div>
+      <div class="hstat fade-in fd4">
+        <div class="hstat-val" data-target="100" data-suffix="%">0%</div>
+        <div class="hstat-lbl">Adaptado a tu negocio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEMAS -->
+<section class="sis-cards" id="sistemas">
+  <div class="sis-sec-header">
+    <div class="section-label fade-in">Nuestros sistemas</div>
+    <h2 class="fade-in fd1">Elegí tu <span class="hl">sistema base</span></h2>
+    <p class="fade-in fd2">Cada uno está pensado para un rubro específico. Lo configuramos y adaptamos con los datos reales de tu negocio.</p>
+  </div>
+  <div class="sis-grid">
+
+    <div class="scard fade-in" style="--ac:#00e5ff;--glow:rgba(0,229,255,0.08);--glow2:rgba(0,229,255,0.15)" id="turnos">
+      <div class="scard-header">
+        <div class="scard-icon-wrap" style="background:rgba(0,229,255,0.1)">📅</div>
+        <div class="scard-info"><h3>Sistema de Turnos</h3><p>Agenda digital con reservas online y recordatorios automáticos por WhatsApp</p></div>
+        <div class="scard-badge" style="color:#00e5ff;border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.08)">MÁS VENDIDO</div>
+      </div>
+      <div class="scard-body">
+        <div class="scard-features">
+          <div class="scard-feat">Reserva online 24hs</div>
+          <div class="scard-feat">Recordatorio WhatsApp</div>
+          <div class="scard-feat">Cancelación fácil</div>
+          <div class="scard-feat">Panel de agenda</div>
+          <div class="scard-feat">Historial de clientes</div>
+          <div class="scard-feat">Reportes mensuales</div>
+          <div class="scard-feat">Múltiples profesionales</div>
+          <div class="scard-feat">Link personalizado</div>
+        </div>
+        <div class="scard-rubros">
+          <span class="scard-rubro">Barberías</span><span class="scard-rubro">Peluquerías</span>
+          <span class="scard-rubro">Consultorios</span><span class="scard-rubro">Psicólogos</span>
+          <span class="scard-rubro">Veterinarias</span><span class="scard-rubro">Est. Jurídicos</span>
+        </div>
+      </div>
+      <div class="scard-footer">
+        <div class="scard-price"><div class="from">desde</div><span class="val">$450.000</span><span class="period">+ $80k/mes</span></div>
+        <a href="https://wa.me/5491100000000?text=Hola!%20Me%20interesa%20el%20Sistema%20de%20Turnos" target="_blank" class="scard-btn" style="color:#00e5ff;border-color:rgba(0,229,255,0.3)">Consultar →</a>
+      </div>
+    </div>
+
+    <div class="scard fade-in fd1" style="--ac:#a78bfa;--glow:rgba(124,58,237,0.08);--glow2:rgba(124,58,237,0.2)" id="gimnasios">
+      <div class="scard-header">
+        <div class="scard-icon-wrap" style="background:rgba(124,58,237,0.1)">🏋️</div>
+        <div class="scard-info"><h3>Sistema para Gimnasios</h3><p>Gestión completa de socios, cuotas y acceso por QR desde el celular</p></div>
+        <div class="scard-badge" style="color:#a78bfa;border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.08)">COMPLETO</div>
+      </div>
+      <div class="scard-body">
+        <div class="scard-features">
+          <div class="scard-feat">Alta y gestión de socios</div>
+          <div class="scard-feat">Control de cuotas</div>
+          <div class="scard-feat">Acceso por QR</div>
+          <div class="scard-feat">Aviso cuota vencida</div>
+          <div class="scard-feat">Fichas de clientes</div>
+          <div class="scard-feat">Panel de admin web</div>
+          <div class="scard-feat">Reportes de ingresos</div>
+          <div class="scard-feat">Control de asistencia</div>
+        </div>
+        <div class="scard-rubros">
+          <span class="scard-rubro">Gimnasios</span><span class="scard-rubro">Box CrossFit</span>
+          <span class="scard-rubro">Academias</span><span class="scard-rubro">Clubes</span>
+        </div>
+      </div>
+      <div class="scard-footer">
+        <div class="scard-price"><div class="from">desde</div><span class="val">$680.000</span><span class="period">+ $120k/mes</span></div>
+        <a href="https://wa.me/5491100000000?text=Hola!%20Me%20interesa%20el%20Sistema%20para%20Gimnasios" target="_blank" class="scard-btn" style="color:#a78bfa;border-color:rgba(124,58,237,0.3)">Consultar →</a>
+      </div>
+    </div>
+
+    <div class="scard fade-in fd2" style="--ac:#34d399;--glow:rgba(5,150,105,0.08);--glow2:rgba(5,150,105,0.2)" id="catalogo">
+      <div class="scard-header">
+        <div class="scard-icon-wrap" style="background:rgba(5,150,105,0.1)">📦</div>
+        <div class="scard-info"><h3>Catálogo y Pedidos Digital</h3><p>Menú o catálogo online con pedidos automáticos por WhatsApp y link de pago</p></div>
+        <div class="scard-badge" style="color:#34d399;border-color:rgba(5,150,105,0.3);background:rgba(5,150,105,0.08)">POPULAR</div>
+      </div>
+      <div class="scard-body">
+        <div class="scard-features">
+          <div class="scard-feat">Catálogo con fotos y precios</div>
+          <div class="scard-feat">Pedidos por WhatsApp</div>
+          <div class="scard-feat">Link de pago o transferencia</div>
+          <div class="scard-feat">Gestión de stock básico</div>
+          <div class="scard-feat">Historial de pedidos</div>
+          <div class="scard-feat">Actualización de precios fácil</div>
+          <div class="scard-feat">Confirmación automática</div>
+          <div class="scard-feat">Notificación al dueño</div>
+        </div>
+        <div class="scard-rubros">
+          <span class="scard-rubro">Casas de comida</span><span class="scard-rubro">Kioscos</span>
+          <span class="scard-rubro">Ferreterías</span><span class="scard-rubro">Distribuidoras</span>
+        </div>
+      </div>
+      <div class="scard-footer">
+        <div class="scard-price"><div class="from">desde</div><span class="val">$380.000</span><span class="period">+ $60k/mes</span></div>
+        <a href="https://wa.me/5491100000000?text=Hola!%20Me%20interesa%20el%20Cat%C3%A1logo%20Digital" target="_blank" class="scard-btn" style="color:#34d399;border-color:rgba(5,150,105,0.3)">Consultar →</a>
+      </div>
+    </div>
+
+    <div class="scard fade-in fd3" style="--ac:#25d366;--glow:rgba(37,211,102,0.08);--glow2:rgba(37,211,102,0.2)" id="whatsapp">
+      <div class="scard-header">
+        <div class="scard-icon-wrap" style="background:rgba(37,211,102,0.1)">💬</div>
+        <div class="scard-info"><h3>WhatsApp Pro para Negocios</h3><p>Tu WhatsApp convertido en una mini central de ventas y atención automática</p></div>
+        <div class="scard-badge" style="color:#25d366;border-color:rgba(37,211,102,0.3);background:rgba(37,211,102,0.08)">NUEVO</div>
+      </div>
+      <div class="scard-body">
+        <div class="scard-features">
+          <div class="scard-feat">Menú automático de opciones</div>
+          <div class="scard-feat">Respuestas 24hs</div>
+          <div class="scard-feat">Derivación por sectores</div>
+          <div class="scard-feat">Seguimiento post-venta</div>
+          <div class="scard-feat">Mensajes de bienvenida</div>
+          <div class="scard-feat">Preguntas frecuentes</div>
+          <div class="scard-feat">Link de pago incluido</div>
+          <div class="scard-feat">Soporte 30 días</div>
+        </div>
+        <div class="scard-rubros">
+          <span class="scard-rubro">Cualquier negocio</span>
+          <span class="scard-rubro">PyMEs</span>
+          <span class="scard-rubro">Profesionales independientes</span>
+        </div>
+      </div>
+      <div class="scard-footer">
+        <div class="scard-price"><div class="from">desde</div><span class="val">$280.000</span><span class="period">pago único</span></div>
+        <a href="https://wa.me/5491100000000?text=Hola!%20Me%20interesa%20el%20WhatsApp%20Pro" target="_blank" class="scard-btn" style="color:#25d366;border-color:rgba(37,211,102,0.3)">Consultar →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHATSAPP PRO DETALLE -->
+<section class="wa-section">
+  <div class="wa-grid">
+    <div class="wa-content">
+      <div class="wa-section-label fade-in">💬 WhatsApp Pro — Cómo funciona</div>
+      <h2 class="fade-in fd1">Tu WhatsApp se convierte en una <span class="hl">central de ventas</span></h2>
+      <p class="fade-in fd2">No es solo un bot. Es un sistema completo que atiende, filtra, responde y hace seguimiento de tus clientes sin que vos estés presente — ni de día ni de noche.</p>
+      <div class="wa-includes fade-in fd2">
+        <div class="wa-inc">Configuración inicial completa</div>
+        <div class="wa-inc">Menú automático</div>
+        <div class="wa-inc">Respuestas inteligentes</div>
+        <div class="wa-inc">Organización de consultas</div>
+        <div class="wa-inc">Mensajes de bienvenida</div>
+        <div class="wa-inc">Preguntas frecuentes</div>
+        <div class="wa-inc">Derivación de clientes</div>
+        <div class="wa-inc">Seguimiento post-venta</div>
+        <div class="wa-inc">Link de pago o transferencia</div>
+        <div class="wa-inc">Soporte por 30 días</div>
+      </div>
+      <div class="wa-price-box fade-in fd3">
+        <span class="wa-price-val">$280.000</span>
+        <span class="wa-price-note">pago único · mantenimiento opcional $60k/mes</span>
+      </div>
+      <a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20mi%20WhatsApp%20Pro" target="_blank" class="wa-btn fade-in fd3">💬 Quiero mi WhatsApp Pro</a>
+    </div>
+    <div class="fade-in fd2">
+      <div class="wa-phone">
+        <div class="wa-ph-header">
+          <div class="wa-ph-avatar">NF</div>
+          <div class="wa-ph-info"><h4>Mi Negocio Bot</h4><p>En línea ahora</p></div>
+          <div class="wa-ph-dot"></div>
+        </div>
+        <div class="wa-ph-chat">
+          <div class="wm r">👋 Bienvenido! Soy el asistente. ¿En qué te ayudo?</div>
+          <div class="wm-menu">
+            <div class="wm-menu-t">📋 Menú principal</div>
+            <div class="wm-item">1️⃣ Ver catálogo / servicios</div>
+            <div class="wm-item">2️⃣ Consultar precios</div>
+            <div class="wm-item">3️⃣ Sacar turno</div>
+            <div class="wm-item">4️⃣ Hablar con una persona</div>
+          </div>
+          <div class="wm s">3</div>
+          <div class="wm r">📅 Turnos disponibles hoy:<br><br>• 14:00hs — Libre<br>• 15:30hs — Libre<br>• 17:00hs — Libre</div>
+          <div class="wm s">14:00hs por favor</div>
+          <div class="wm r">✅ Turno confirmado! Te mando recordatorio 1 hora antes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso">
+  <div class="sis-sec-header">
+    <div class="section-label fade-in">El proceso</div>
+    <h2 class="fade-in fd1">De la idea al sistema en <span class="hl">2 semanas</span></h2>
+    <p class="fade-in fd2">Proceso claro, precio fijo y entrega en tiempo. Sin sorpresas.</p>
+  </div>
+  <div class="proceso-steps">
+    <div class="step fade-in"><div class="step-num">1</div><h4>Diagnóstico gratis</h4><p>Charlamos sobre tu negocio sin compromiso</p></div>
+    <div class="step fade-in fd1"><div class="step-num">2</div><h4>Propuesta</h4><p>Precio fijo y entrega definida por escrito</p></div>
+    <div class="step fade-in fd2"><div class="step-num">3</div><h4>Desarrollo</h4><p>Configuramos con tus datos reales</p></div>
+    <div class="step fade-in fd3"><div class="step-num">4</div><h4>Capacitación</h4><p>Tu equipo lo domina en 1 hora</p></div>
+    <div class="step fade-in fd4"><div class="step-num">5</div><h4>Soporte</h4><p>No desaparecemos. Siempre disponibles.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sis-cta">
+  <h2 class="fade-in">¿Listo para digitalizar<br>tu <span class="hl">negocio</span>?</h2>
+  <p class="fade-in fd1">Hablemos 15 minutos y te mostramos exactamente qué sistema necesita tu negocio. Sin compromiso.</p>
+  <div class="sis-cta-btns fade-in fd2">
+    <a href="https://wa.me/5491100000000" target="_blank" class="btn-p">💬 Hablar por WhatsApp</a>
+    <a href="index.html#contacto" class="btn-s">📞 Pedir diagnóstico gratis</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sis-footer">
+  <div class="sis-footer-logo">Nex<span>futuro</span> Consulting</div>
+  <p>© 2026 Nexfuturo Consulting. Todos los derechos reservados.</p>
+  <a href="index.html">← Volver al inicio</a>
+</footer>
+
+<script>
+// PARTÍCULAS
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [], W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+function mkP() { return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.5+0.3, dx:(Math.random()-0.5)*0.3, dy:(Math.random()-0.5)*0.3, alpha:Math.random()*0.4+0.1, color:Math.random()>0.5?'26,111,255':'0,229,255' }; }
+for(let i=0;i<80;i++) particles.push(mkP());
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p => {
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${p.color},${p.alpha})`; ctx.fill();
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>W) p.dx*=-1; if(p.y<0||p.y>H) p.dy*=-1;
+  });
+  for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
+    const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, d=Math.sqrt(dx*dx+dy*dy);
+    if(d<120){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(26,111,255,${0.06*(1-d/120)})`; ctx.lineWidth=0.5; ctx.stroke(); }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+// FADE IN
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold:0.12 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+setTimeout(() => document.querySelectorAll('.sis-hero .fade-in').forEach(el => el.classList.add('visible')), 100);
+
+// CONTADORES
+function counter(el) {
+  const t=parseInt(el.dataset.target), s=el.dataset.suffix||'', d=1800, st=performance.now();
+  function u(n){ const p=Math.min((n-st)/d,1), e=1-Math.pow(1-p,3); el.textContent=Math.round(e*t)+s; if(p<1) requestAnimationFrame(u); }
+  requestAnimationFrame(u);
+}
+const cObs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting&&e.target.dataset.target){ counter(e.target); cObs.unobserve(e.target); } }), { threshold:0.5 });
+document.querySelectorAll('[data-target]').forEach(el => cObs.observe(el));
+setTimeout(() => document.querySelectorAll('.sis-hero [data-target]').forEach(el => counter(el)), 500);
+</script>
+</body>
+</html>
