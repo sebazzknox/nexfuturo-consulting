@@ -146,6 +146,95 @@ body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: #fff; o
 .sis-footer a { font-size: 0.75rem; color: var(--muted); text-decoration: none; }
 .sis-footer a:hover { color: #fff; }
 </style>
+<style>/* fix-sistemas-mobile */
+@media (max-width: 768px) {
+
+  /* Hero sistemas - stack vertical */
+  .sis-hero,
+  .sistemas-hero,
+  [class*="hero"] {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+
+  /* Cards sistemas - 1 columna */
+  .sistemas-grid,
+  .sis-grid,
+  [class*="sistemas-grid"],
+  [class*="sis-grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* WhatsApp Pro section - stack */
+  .wa-pro-section,
+  .wa-section,
+  [class*="wa-pro"],
+  [class*="whatsapp-section"] {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+
+  /* Mockup chat - centrar y achicar */
+  .wa-mockup,
+  .chat-mockup,
+  [class*="mockup"] {
+    max-width: 300px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  /* Navbar hamburguesa en sistemas */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #0a0f1e;
+    padding: 20px;
+    gap: 16px;
+    z-index: 999;
+    border-bottom: 1px solid rgba(26,111,255,0.2);
+  }
+  .nav-links.open { display: flex; }
+  .nav-hamburger {
+    display: flex !important;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+  }
+  nav { position: relative; }
+
+  /* Proceso pasos - 2 columnas en mobile */
+  .proceso-grid,
+  [class*="proceso"],
+  [class*="steps"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* Chips rubros - wrap */
+  .rubros-grid,
+  [class*="rubros"],
+  [class*="chips"] {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+</style>
 </head>
 <body>
 
