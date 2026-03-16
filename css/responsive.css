@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    NEXFUTURO CONSULTING — Responsive / Mobile
    responsive.css
    ============================================ */
@@ -85,5 +85,77 @@
   }
   .plan-price {
     font-size: 1.8rem;
+  }
+}
+/* â”€â”€ FIX MOBILE HERO â”€â”€ */
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  .hero-text {
+    order: 1;
+  }
+
+  .hero-visual {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .hero-mockup {
+    max-width: 280px;
+    width: 100%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-badge {
+    margin: 0 auto;
+  }
+
+  /* Navbar hamburguesa */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    padding: 20px;
+    gap: 16px;
+    z-index: 999;
+    border-bottom: 1px solid rgba(26,111,255,0.2);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-hamburger {
+    display: flex !important;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  nav {
+    position: relative;
   }
 }
