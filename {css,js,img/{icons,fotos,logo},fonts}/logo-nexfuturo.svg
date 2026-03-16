@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 55" width="200" height="55">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a6fff"/>
+      <stop offset="100%" style="stop-color:#00e5ff"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="34" font-family="sans-serif" font-size="30" font-weight="700" fill="#1a6fff">Nex</text>
+  <text x="56" y="34" font-family="sans-serif" font-size="30" font-weight="300" fill="#ffffff">futuro</text>
+  <text x="0" y="49" font-family="sans-serif" font-size="10" letter-spacing="4" fill="#00e5ff">CONSULTING</text>
+  <line x1="0" y1="53" x2="138" y2="53" stroke="url(#blueGrad)" stroke-width="1.5"/>
+</svg>
