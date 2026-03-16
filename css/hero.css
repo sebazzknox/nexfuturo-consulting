@@ -292,3 +292,46 @@
 @keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
 @keyframes float3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
 @keyframes fadeUp  { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+/* â”€â”€ FIX HERO MOBILE â”€â”€ */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr !important;
+    padding: 100px 6% 60px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    margin: 0 auto 1.5rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    height: 420px;
+    margin-top: 0;
+  }
+
+  .phone-mockup {
+    width: 220px;
+    height: 430px;
+  }
+
+  .hero-tag-1, .hero-tag-2, .hero-tag-3 {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .hero-tag-2 {
+    right: 2%;
+  }
+}
